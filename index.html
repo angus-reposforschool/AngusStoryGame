@@ -1,1 +1,52 @@
 <!-- Add your index page here -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title >
+</head>
+<body>
+    <header>
+      <nav>
+            <ul> 
+                <li><a href="index.html">Home</a></li>
+            </ul>
+            <ul> 
+                <li><a href="game.html">Play the game</a></li>
+            </ul>
+            <ul> 
+                <li><a href="about.html">About the creator</a></li>
+            </ul>
+        </nav>
+    </header>
+    <form action="GET" class="gameform">
+        <label for="code">do you code?</label>
+        <br>
+        <select name="code" id="code" required>
+            <option value="yes">yes</option>
+            <option value="no">no</option>
+            <option value="soon">planning to</option>
+        </select>
+        <p>how long have you been coding (if you do)</p>
+        <input type="radio" name="howlong" id="month">
+        <label for="month">1 month</label>
+        <br>
+        <input type="radio" name="howlong" id="year">
+        <label for="year">1 year</label>
+        <br>
+        <input type="radio" name="howlong" id="moreyear">
+        <label for="moreyear">more than a year</label>
+        <p></p>
+        <label for="username">what's your username?</label>
+        <br>
+        <input type="text" placeholder="username" id="username" name="username">
+        <p></p>
+        <label for="color">pick a color</label>
+        <br>
+        <input type="color" name="charcolor" id="charcolor">
+        <p></p>
+        <input type="submit" name="" id="">
+    </form>
+</body>
+</html>
