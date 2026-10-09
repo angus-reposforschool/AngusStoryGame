@@ -1,0 +1,85 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #181f15;
+    color: #61cf5a;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+    margin-top: 45px;
+    font-size: 1.1em;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+a:link {
+    color: #61cf5a;
+}
+
+a:visited {
+    color: #50864c;
+}
+
+.cont {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transform: translateY(-30px);
+}
+
+.cont h1 {
+    font-size: 3em;
+}
+
+.cont p {
+    font-size: 1.5em;
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+}
+
+fieldset {
+    width: 768px;
+    height: 400px;
+}
+
+legend {
+    margin: 10px 10px;
+}
+
+.gameform {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.selectors {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#code {
+    background: #000;
+    color: #61cf5a;
+    border: 1px solid #61cf5a;
+}
+
+#month, #year, #moreyear {
+    background: #000;
+}
