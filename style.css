@@ -47,6 +47,43 @@ a:visited {
     font-size: 1.5em;
 }
 
+.gapcss {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.gamecont, section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+}
+
+.gamecont h1 {
+    font-size: 3em;
+
+}
+
+#scene-text {
+    display: flex;
+    font-size: 1.5em;
+    align-self: center;
+}
+
+#choices-container {
+    display: flex;
+    gap: 10px;
+}
+
+#choices-container button {
+    background: #000;
+    color: #61cf5a;
+    border: 1px solid #61cf5a;
+    padding: 2px;
+}
+
 .form {
     display: flex;
     justify-content: center;
@@ -81,5 +118,36 @@ legend {
 }
 
 #month, #year, #moreyear {
+    appearance: none;
+    border-radius: 50%;
+    height: 1em;
+    width: 1em;
     background: #000;
+    border: 0.15em solid #181f15;
+    outline: 0.1em solid #61cf5a;
+    outline-offset: -0.05em;
+}
+
+#month:checked, #year:checked, #moreyear:checked {
+    box-shadow: inset 1em 1em #61cf5a;
+}
+
+#username {
+    background: #000;
+    color: #61cf5a;
+    border: 1px solid #61cf5a;
+    padding: 2px;
+}
+
+#charcolor {
+    background: #000;
+    border: 1px solid #61cf5a;
+    padding: 0px;
+}
+
+.submit {
+    background: #000;
+    color: #61cf5a;
+    border: 1px solid #61cf5a;
+    padding: 2px;
 }

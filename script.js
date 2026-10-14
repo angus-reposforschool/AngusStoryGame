@@ -10,27 +10,22 @@
 // --------------------------------------------------
 
 // First, we create a variable for the current scene being displayed
-let currentScene = "backyard";
+let currentScene = "dashboard";
 
 // Then, we create an object that stores the data for each scene,
 const scenes = {
-  // See "backyard" for the first example
-  backyard: {
-    title: "Location: Backyard",
-    character: "Interviewee:Grandma",
-    text: "Text: well what I remember happening is that Darcie went inside to play with her pretend kitchen, I heard her neighbor mention he was really hungry, and the dog ran around really quickly",
+  dashboard: {
+    title: "Developer Dashboard",
+    text: "Message: You are a solo developer working on a big indie project and it would suck if your source code was leaked. Well, that’s exactly what has happened. You need to act fast to prevent the leak from propagating all over the internet by finding the origin of the leak and attempting to take it down. Go through websites like GitHub and Google Drive to try to find it. Good luck.",
     // you can choose how many choices to include
     // each choice can have text, an action, and/or nextScene
     choices: [
       {
-        text: "Chase after the dog (-10 HP)",
-        action: function () {
-          updateHealth(-10);
-        },
+        text: "Go to GitHub",
         nextScene: "entrance"
       },
       {
-        text: "Ask about the neighbor",
+        text: "Go to YouTube",
         nextScene: "hallway"
       },
       {
@@ -76,7 +71,7 @@ const scenes = {
     choices: [
       {
         text: "Try to open it",
-        action: unlockDoor
+        action: "no"
       },
       {
         text: "Go back",
