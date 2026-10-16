@@ -22,68 +22,158 @@ const scenes = {
     choices: [
       {
         text: "Go to GitHub",
-        nextScene: "entrance"
+        nextScene: "github"
       },
       {
         text: "Go to YouTube",
-        nextScene: "hallway"
+        nextScene: "youtube"
       },
       {
-          text: "Pick up the brass key",
+          text: "Go to Reddit",
           action: function () {
-            pickUpItem("brass key");
-          },
-          nextScene: "hallway"
+            redditUnblock();
+            updateHealth(-5);
+          }
+      },
+      {
+          text: "Go to Google Drive",
+          action: function () {
+            gDriveInfo();
+            updateHealth(-5);
+          }
+      },
+      {
+          text: "Go to MediaFire",
+          action: function () {
+            mediaFireInfo();
+            updateHealth(-5);
+          }
+      },
+      {
+          text: "Browse the web",
+          nextScene: "reddit"
+      },
+      {
+          text: "File a claim",
+          action: function () {
+            fileClaim();
+          }
       }
     ]
   },
 
-  entrance: {
-    title: "Location: Entrance",
-    character: "Interviewee:Neighbor",
-    text: "well what I remember...",
+  github: {
+    title: "GitHub",
+    text: "This is GitHub, it is where your project’s source code is kept in a private repository. There is a chance the leak could be here. Someone could’ve possibly cloned your project as in the past, you weren’t nearly as cautious as you are today. Maybe you gave someone permission to access your repo—maybe you let someone use your computer.",
     choices: [
       {
-        text: "Ask about the dog",
-        nextScene: "backyard"
+        text: "Search around on your own",
+        action: function () {
+          updateHealth(-10)
+        },
+        nextScene: "b"
       },
-         {
-        text: "Ask about the neighbor",
+      {
+        text: "Ask a fellow developer to help",
+        action: function () {
+          pickUpItem("Google Drive links")
+        },
         nextScene: "hallway"
-      }
-    ]
-  },
-
-  hallway: {
-    title: "The Hallway",
-    text: "The hallway is dark and silent.",
-    choices: [
-      {
-        text: "backyard",
-        nextScene: "lockedDoor"
-      }
-    ]
-  },
-
-   lockedDoor: {
-    title: "The Locked Door",
-    text: "The door handle doesn't move.",
-    choices: [
-      {
-        text: "Try to open it",
-        action: "no"
       },
       {
-        text: "Go back",
-        nextScene: "backyard"
+        text: "Go back to dashboard",
+        nextScene: "dashboard"
       }
     ]
   },
 
-   solution: {
-    title: "The solution",
-    text: "You solved the mystery!",
-    
+  youtube: {
+    title: "YouTube",
+    text: "Welcome to YouTube—you’ve probably been here before. It’s a platform where creators share content to all the viewers out there. Keeping that in mind, there is a possibility that there’s a user using it as a cloud storage program. Your code may be linked under a video; maybe it links back to GitHub.",
+    choices: [
+      {
+        text: "Investigate videos titled similarly to your project's name's descriptions.",
+        action: function () {
+          updateHealth(-10)
+        },
+        nextScene: "b"
+      },
+      {
+        text: "Watch an unrelated relaxing video (only once)",
+        action: function () {
+          if (!hpBoostUsed) {
+            updateHealth(30);
+            hpBoostUsed = true;
+          }
+          else {
+            updateHealth(-35);
+          }
+        },
+        nextScene: "b"
+      },
+      {
+        text: "Go back to dashboard",
+        nextScene: "dashboard"
+      },
+    ]
+  },
+
+   reddit: {
+    title: "Reddit",
+    text: "Reddit is a platform with a lot of different subreddits. Users do all kinds of things on Reddit and one of those things may be posting leaks so go check it out.",
+    choices: [
+      {
+        text: "Search subreddits you find suspicious",
+        nextScene: "a"
+      },
+      {
+        text: "Go back to dashboard",
+        nextScene: "dashboard"
+      }
+    ]
+  },
+
+   gdrive: {
+    title: "Google Drive",
+    text: "People use Google Drive to store files and there’s a chance your leaked files are also stored on there. You can check public folders to see if any of your files are stored in them.",
+    choices: [
+      {
+        text: "Look through the Google Drive links you've retrieved from the fellow developer",
+        action: function () {
+          updateHealth(-10);
+        },
+        nextScene: "a"
+      },
+      {
+        text: "Download and play a game",
+        action: function () {
+          updateHealth(10);
+        },
+        nextScene: "a"
+      },
+      {
+        text: "Go back to dashboard",
+        nextScene: "dashboard"
+      }
+    ]
+  },
+
+  mediafire: {
+    title: "MediaFire",
+    text: "MediaFire is pretty similar to Google Drive in a way where you can store files on both, except MediaFire is primarily used for sharing files. Since it’s mostly used for sharing files, you can scan through links to see whether or not any downloads on there matches your project’s name.",
+    choices: [
+      {
+        text: "Download random archives you think might be your leaked code",
+        action: function () {
+          updateHealth(-10);
+        },
+        nextScene: "a"
+      },
+      {
+        text: "Go back to dashboard",
+        nextScene: "dashboard"
+      }
+    ]
   }
 };
 
@@ -162,6 +252,9 @@ updateScene(currentScene);
 // Create a variable for health
 let health = 100;
 
+// variable to check if player used health boost
+let hpBoostUsed = false;
+
 // Display current health
 const healthDisplay = document.getElementById("health-display");
 
@@ -203,11 +296,42 @@ function pickUpItem(itemName) {
 // --------------------------------------------------
 
 // Create a function that checks if the inventory contains one item and if so shows the win condition scene.
-function unlockDoor() {
-  if (inventory.includes("brass key")) {
+function fileClaim() {
+  if (inventory.includes("leak")) {
     updateScene("solution");
   } else {
-    messageDisplay.textContent = "The door is locked.";
+    messageDisplay.textContent = "You haven't found the leak yet!";
   }
 }
 
+function redditUnblock() {
+  if (inventory.includes("Reddit unblocked")) {
+    updateScene("reddit");
+  } else {
+    messageDisplay.textContent = "Reddit is blocked on your network.";
+  }
+}
+
+function gDriveInfo() {
+  if (inventory.includes("Google Drive links")) {
+    updateScene("gdrive");
+  } else {
+    messageDisplay.textContent = "Try searching for public Google Drive links.";
+  }  
+}
+
+function mediaFireInfo() {
+  if (inventory.includes("MediaFire links")) {
+    updateScene("mediafire");
+  } else {
+    messageDisplay.textContent = "Try searching for public MediaFire links.";
+  } 
+}
+
+function playGame() {
+  if (inventory.includes("MediaFire links")) {
+    updateScene("mediafire");
+  } else {
+    messageDisplay.textContent = "Try searching for public MediaFire links.";
+  } 
+}
