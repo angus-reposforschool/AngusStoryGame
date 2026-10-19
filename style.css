@@ -93,6 +93,7 @@ a:visited {
 fieldset {
     width: 768px;
     height: 400px;
+    border-color: #61cf5a;
 }
 
 legend {

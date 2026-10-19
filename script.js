@@ -51,7 +51,7 @@ const scenes = {
       },
       {
           text: "Browse the web",
-          nextScene: "reddit"
+          nextScene: "browser"
       },
       {
           text: "File a claim",
@@ -71,7 +71,7 @@ const scenes = {
         action: function () {
           updateHealth(-10)
         },
-        nextScene: "b"
+        nextScene: "githubwrong"
       },
       {
         text: "Ask a fellow developer to help",
@@ -87,6 +87,17 @@ const scenes = {
     ]
   },
 
+  githubwrong: {
+    title: "Wrong",
+    text: "You didn't find anything on your own. It's so lonely doing this alone.",
+    choices: [
+      {
+        text: "Go back to GitHub",
+        nextScene: "github"
+      }
+    ]
+  },
+
   youtube: {
     title: "YouTube",
     text: "Welcome to YouTube—you’ve probably been here before. It’s a platform where creators share content to all the viewers out there. Keeping that in mind, there is a possibility that there’s a user using it as a cloud storage program. Your code may be linked under a video; maybe it links back to GitHub.",
@@ -96,7 +107,7 @@ const scenes = {
         action: function () {
           updateHealth(-10)
         },
-        nextScene: "b"
+        nextScene: "youtubewrong"
       },
       {
         text: "Watch an unrelated relaxing video (only once)",
@@ -108,13 +119,23 @@ const scenes = {
           else {
             updateHealth(-35);
           }
-        },
-        nextScene: "b"
+        }
       },
       {
         text: "Go back to dashboard",
         nextScene: "dashboard"
       },
+    ]
+  },
+
+  youtubewrong: {
+    title: "Wrong",
+    text: "Unfortunately none of them were related to your leak so your heart sinks.",
+    choices: [
+      {
+        text: "Go back to YouTube",
+        nextScene: "youtube"
+      }
     ]
   },
 
@@ -124,11 +145,25 @@ const scenes = {
     choices: [
       {
         text: "Search subreddits you find suspicious",
-        nextScene: "a"
+        action: function () {
+          pickUpItem("Leak");
+        },
+        nextScene: "redditwin"
       },
       {
         text: "Go back to dashboard",
         nextScene: "dashboard"
+      }
+    ]
+  },
+
+  redditwin: {
+    title: "The leak",
+    text: "You've found the leak! It was in a subreddit named the same name as your project. Now all you have to do is try to take it down.",
+    choices: [
+      {
+        text: "Go back to Reddit",
+        nextScene: "reddit"
       }
     ]
   },
@@ -142,18 +177,26 @@ const scenes = {
         action: function () {
           updateHealth(-10);
         },
-        nextScene: "a"
+        nextScene: "gdrivewrong"
       },
       {
-        text: "Download and play a game",
-        action: function () {
-          updateHealth(10);
-        },
-        nextScene: "a"
+        text: "Download and play a game (35/65 chance)",
+        action: playGame,
       },
       {
         text: "Go back to dashboard",
         nextScene: "dashboard"
+      }
+    ]
+  },
+
+  gdrivewrong: {
+    title: "Wrong",
+    text: "The links were useless...",
+    choices: [
+      {
+        text: "Go back to Google Drive",
+        nextScene: "gdrive"
       }
     ]
   },
@@ -167,14 +210,53 @@ const scenes = {
         action: function () {
           updateHealth(-10);
         },
-        nextScene: "a"
+        nextScene: "mediafirewrong"
       },
       {
         text: "Go back to dashboard",
         nextScene: "dashboard"
       }
     ]
-  }
+  },
+
+  mediafirewrong: {
+    title: "Wrong",
+    text: "That's not a very safe thing to do, by the way.",
+    choices: [
+      {
+        text: "Go back to MediaFire",
+        nextScene: "mediafire"
+      }
+    ]
+  },
+
+  browser: {
+    title: "Browsing the web",
+    text: "Welcome to Webrowsing, a very good web browser. What would you like to search for?",
+    choices: [
+      {
+        text: "Search for tutorials on how to unblock websites",
+        action: function () {
+          pickUpItem("Reddit unblocked");
+        }
+      },
+      {
+        text: "Search for public MediaFire links",
+        action: function () {
+          pickUpItem("MediaFire links");
+        }
+      },
+      {
+        text: "Go back to dashboard",
+        nextScene: "dashboard"
+      }
+    ]
+  },
+
+  win: {
+    title: "You win",
+    text: "Congratulations! You've found the leak and filed a claim against it. Hopefully you didn't just go straight to the web browser and win immediately.",
+  },
 };
 
 // --------------------------------------------------
@@ -297,8 +379,8 @@ function pickUpItem(itemName) {
 
 // Create a function that checks if the inventory contains one item and if so shows the win condition scene.
 function fileClaim() {
-  if (inventory.includes("leak")) {
-    updateScene("solution");
+  if (inventory.includes("Leak")) {
+    updateScene("win");
   } else {
     messageDisplay.textContent = "You haven't found the leak yet!";
   }
@@ -329,9 +411,11 @@ function mediaFireInfo() {
 }
 
 function playGame() {
-  if (inventory.includes("MediaFire links")) {
-    updateScene("mediafire");
-  } else {
-    messageDisplay.textContent = "Try searching for public MediaFire links.";
-  } 
+    const result = Math.random() < 0.35 ? "Win" : "Lose";
+    if (result === "Win") {
+      updateHealth(25);
+    }
+    else {
+      updateHealth(-35);
+    }
 }
