@@ -32,21 +32,18 @@ const scenes = {
           text: "Go to Reddit",
           action: function () {
             redditUnblock();
-            updateHealth(-5);
           }
       },
       {
           text: "Go to Google Drive",
           action: function () {
             gDriveInfo();
-            updateHealth(-5);
           }
       },
       {
           text: "Go to MediaFire",
           action: function () {
             mediaFireInfo();
-            updateHealth(-5);
           }
       },
       {
