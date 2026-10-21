@@ -42,7 +42,11 @@ a:visited {
 }
 
 .cont h1 {
-    font-size: 3em;
+    font-size: 3rem;
+}
+
+.cont img {
+    width: 15rem;
 }
 
 .cont p {
