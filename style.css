@@ -41,8 +41,9 @@ a:visited {
     transform: translateY(-25px);
 }
 
-.cont h1 {
+.title, #scenetitle {
     font-size: 3rem;
+    font-family: "Roboto Mono", monospace;
 }
 
 .cont img {
