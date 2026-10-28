@@ -6,7 +6,7 @@
 }
 
 body {
-    background: #181f15;
+    background-color: #181f15;
     color: #61cf5a;
 }
 
@@ -23,6 +23,8 @@ nav {
     flex-direction: column;
     gap: 8px;
     z-index: 1;
+    word-spacing: normal;
+    letter-spacing: normal;
 }
 
 a:link {
@@ -38,20 +40,37 @@ a:visited {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    transform: translateY(-25px);
+    list-style-position: inside;
 }
 
-.title, #scenetitle {
+.title, #scene-title {
     font-size: 3rem;
     font-family: "Roboto Mono", monospace;
+    font-weight: 400;
 }
 
 .cont img {
     width: 15rem;
+    border-radius: 0%; /*i don't want round*/
 }
 
 .cont p {
     font-size: 1.5em;
+}
+
+.cards {
+    display: flex;
+    margin-top: 30px;
+    width: 850px;
+    height: 400px;
+    gap: 50px;
+}
+
+.card {
+    flex: 1;
+    border: 2px solid #61cf5a;
+    padding: 30px;
+    
 }
 
 .gapcss {
