@@ -27,11 +27,19 @@ nav {
     letter-spacing: normal;
 }
 
+.navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
+    color: #50864c;
+}
+
 a:link {
     color: #61cf5a;
 }
 
 a:visited {
+    color: #50864c;
+}
+
+a:active {
     color: #50864c;
 }
 
